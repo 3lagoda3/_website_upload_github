@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV — Max Zaika</title>
+  <style>
+    @font-face {
+      font-family: "KyivType Sans";
+      src: url('./fonts/KyivType2020-14-12/KyivType-NoVariable/OTF/KyivTypeSans-Black-.otf') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .cv-header {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 50;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .cv-header__title {
+      font-family: "KyivType Sans", "Arial Narrow", Arial, sans-serif;
+      font-size: clamp(1.7rem, 3.2vw, 3.1rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.045em;
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin: 0 0 0 -0.06em;
+      display: inline-block;
+    }
+
+    .cv-header__i-anchor {
+      position: relative;
+      display: inline-block;
+    }
+
+    .cv-header__kicker {
+      position: absolute;
+      left: 58%;
+      bottom: calc(100% + 0.12rem);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .cv-header__kicker::before {
+      content: "";
+      display: block;
+      width: 0.32rem;
+      height: 0.32rem;
+      border-radius: 999px;
+      background: #e1272f;
+      animation: recPulse 2s ease-in-out infinite;
+    }
+
+    .cv-header__role {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(0.64rem, 0.8vw, 0.82rem);
+      font-weight: 500;
+      color: #e1272f;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin: 0.42rem 0 0;
+    }
+
+    @keyframes recPulse {
+      0%   { opacity: 0; }
+      16%  { opacity: 0; }
+      52%  { opacity: 1; }
+      85%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    @media (min-width: 768px) {
+      .cv-header { top: 1.8rem; left: 1.8rem; }
+      .cv-header__title { font-size: clamp(2.1rem, 3.6vw, 3.6rem); }
+      .cv-header__role { letter-spacing: 0.54em; }
+      .cv-header__kicker { left: 57%; bottom: calc(100% - 0.1rem); }
+      .cv-header__kicker::before { width: 0.7rem; height: 0.7rem; }
+    }
+
+    .cv-content {
+      padding: 10rem 2rem 6rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .cv-toggle {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .cv-toggle__btn {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.6rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cv-toggle__btn.is-active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .cv-download {
+      display: none;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .cv-download.is-visible {
+      display: flex;
+    }
+
+    .cv-download__btn {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.7rem 1.6rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .cv-download__btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .cv-image {
+      display: none;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .cv-image.is-visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="cv-header" aria-label="Back to home">
+    <span class="cv-header__title">
+      MAX ZA<span class="cv-header__i-anchor">I<span class="cv-header__kicker" aria-hidden="true"></span></span>KA
+    </span>
+    <span class="cv-header__role">DIRECTOR OF PHOTOGRAPHY</span>
+  </a>
+
+  <div class="cv-content">
+
+    <div class="cv-toggle">
+      <button class="cv-toggle__btn" data-version="dark">DARK</button>
+      <button class="cv-toggle__btn is-active" data-version="light">LIGHT</button>
+    </div>
+
+    <div class="cv-download" id="downloadDark">
+      <a class="cv-download__btn" href="./assets/cv/CV_ZAIKA_DoP_ENG_dark.pdf" download="CV_MaxZaika_ENG_dark.pdf">
+        ↓ DOWNLOAD PDF
+      </a>
+    </div>
+
+    <div class="cv-download is-visible" id="downloadLight">
+      <a class="cv-download__btn" href="./assets/cv/CV_ZAIKA_DoP_ENG_light.pdf" download="CV_MaxZaika_ENG_light.pdf">
+        ↓ DOWNLOAD PDF
+      </a>
+    </div>
+
+    <img
+      class="cv-image"
+      id="imgDark"
+      src="./assets/cv/png/CV_ZAIKA_DoP_ENG_dark.png"
+      alt="Max Zaika CV dark version"
+    />
+    <img
+      class="cv-image is-visible"
+      id="imgLight"
+      src="./assets/cv/png/CV_ZAIKA_DoP_ENG_light.png"
+      alt="Max Zaika CV light version"
+    />
+
+  </div>
+
+  <script>
+    const toggleBtns = document.querySelectorAll('.cv-toggle__btn');
+    const imgDark = document.getElementById('imgDark');
+    const imgLight = document.getElementById('imgLight');
+    const dlDark = document.getElementById('downloadDark');
+    const dlLight = document.getElementById('downloadLight');
+
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        toggleBtns.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const v = btn.dataset.version;
+        if (v === 'dark') {
+          imgDark.classList.add('is-visible');
+          imgLight.classList.remove('is-visible');
+          dlDark.classList.add('is-visible');
+          dlLight.classList.remove('is-visible');
+        } else {
+          imgLight.classList.add('is-visible');
+          imgDark.classList.remove('is-visible');
+          dlLight.classList.add('is-visible');
+          dlDark.classList.remove('is-visible');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
