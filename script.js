@@ -1,3 +1,77 @@
+// ─── INTRO LOADER ───
+const intro = document.getElementById('intro');
+const introText = document.getElementById('introText');
+
+const words = [
+  { text: 'HELLO', small: false },
+  { text: 'ПРИВІТ', small: false },
+  { text: 'HALLO', small: false },
+  { text: 'f*ck ruzzia', small: true },
+];
+
+let wordIndex = 0;
+
+function showWord() {
+  const word = words[wordIndex];
+  introText.textContent = word.text;
+  introText.classList.toggle('is-small', word.small);
+  introText.classList.remove('is-visible');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      introText.classList.add('is-visible');
+    });
+  });
+
+  wordIndex++;
+
+  if (wordIndex < words.length) {
+    setTimeout(() => {
+      introText.classList.remove('is-visible');
+      setTimeout(showWord, 350);
+    }, 500);
+  } else {
+    setTimeout(hideIntro, 600);
+  }
+}
+
+function hideIntro() {
+  introText.classList.remove('is-visible');
+  setTimeout(() => {
+    intro.classList.add('is-hidden');
+    setTimeout(() => {
+      intro.style.display = 'none';
+    }, 600);
+  }, 200);
+}
+
+// Start immediately, hide after words finish or video loads — whichever is later
+const heroVideo = document.querySelector('.hero__video');
+let wordsFinished = false;
+let videoReady = false;
+
+function checkHide() {
+  if (wordsFinished && videoReady) hideIntro();
+}
+
+showWord();
+
+// Mark words done after all words play (~2.5s)
+setTimeout(() => {
+  wordsFinished = true;
+  checkHide();
+}, 2500);
+
+// Mark video ready when it can play
+heroVideo.addEventListener('canplay', () => {
+  videoReady = true;
+  checkHide();
+});
+
+// Fallback — hide after 4 seconds no matter what
+setTimeout(() => {
+  hideIntro();
+}, 4000);
 // Hover-to-play previews
 document.querySelectorAll('.work__item').forEach(item => {
   const video = item.querySelector('.work__video');
