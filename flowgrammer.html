@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flowgrammer — Max Zaika</title>
+  <style>
+    @font-face {
+      font-family: "KyivType Sans";
+      src: url('./fonts/KyivType2020-14-12/KyivType-NoVariable/OTF/KyivTypeSans-Black-.otf') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --bg: #000;
+      --border: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --text-dim: rgba(255,255,255,0.55);
+      --accent: #e1272f;
+      --font-display: "KyivType Sans", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+      --font-body: "IBM Plex Mono", monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      pointer-events: none;
+    }
+
+    .nav__logo {
+      pointer-events: all;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .nav__logo-title {
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.2vw, 3.1rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+    }
+
+    .i-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dot {
+      position: absolute;
+      left: 58%;
+      bottom: calc(100% - 0.1rem);
+      transform: translateX(-50%);
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: var(--accent);
+      animation: recPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes recPulse {
+      0%,16%  { opacity: 0; }
+      52%     { opacity: 1; }
+      85%,100%{ opacity: 0; }
+    }
+
+    .nav__logo-role {
+      margin-top: 0.42rem;
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-size: clamp(0.54rem, 0.75vw, 0.72rem);
+      font-weight: 500;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav__back {
+      pointer-events: all;
+      color: var(--text-dim);
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+      padding-top: 0.3rem;
+    }
+
+    .nav__back:hover { color: #fff; }
+
+    /* ─── INTRO ─── */
+    .intro {
+      padding: 10rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .intro__eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .intro__title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 10vw, 9rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 1.6rem;
+    }
+
+    .intro__sub {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      line-height: 1.9;
+      display: inline-block;
+      border-left: 1px solid var(--accent);
+      padding-left: 1rem;
+      text-align: left;
+    }
+
+    .intro__sub em {
+      color: #fff;
+      font-style: normal;
+    }
+
+    /* ─── VIDEO ─── */
+    .video-section {
+      display: flex;
+      justify-content: center;
+      padding: 3rem 2rem 4rem;
+    }
+
+    .video-wrap {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      display: block;
+      border-radius: 3px;
+      background: #111;
+    }
+
+    .video-label {
+      margin-top: 0.6rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    /* ─── DIVIDER ─── */
+    .rule {
+      margin: 0 2rem;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── SCOPE ─── */
+    .scope {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .scope__sections {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .scope__section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .scope__section:last-child {
+      border-bottom: none;
+    }
+
+    .section__label {
+      font-family: var(--font-body);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .scope__section p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.78rem;
+      line-height: 1.9;
+    }
+
+    .scope__section p + p { margin-top: 0.9rem; }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      justify-content: center;
+    }
+
+    .tool {
+      font-family: var(--font-body);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+    }
+
+    /* ─── BEHIND THE SCENES ─── */
+    .bts {
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .bts__label {
+      font-family: var(--font-body);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .bts__heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+
+    .bts__img {
+      width: 100%;
+      max-width: 1000px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 3px;
+    }
+
+    .bts__caption {
+      margin-top: 0.8rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: #cdcdcd;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: flex-start;
+      border-top: 1px solid rgba(22,22,22,0.08);
+      margin-top: 4rem;
+    }
+
+    .footer__col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #1c1c1e;
+    }
+
+    .footer__col:nth-child(1) { text-align: left; }
+    .footer__col:nth-child(2) { text-align: center; align-items: center; }
+    .footer__col:nth-child(3) { text-align: right; align-items: flex-end; }
+
+    .footer__link {
+      color: #1c1c1e;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .footer__link:hover { opacity: 0.6; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      .nav { padding: 1.2rem; }
+      .intro { padding: 8rem 1.5rem 2rem; }
+      .video-section { padding: 2rem 1.5rem 3rem; }
+      .scope { padding: 3rem 1.5rem; }
+      .bts { padding: 3rem 1.5rem; }
+      .rule { margin: 0 1.5rem; }
+
+      .footer {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+      }
+      .footer__col:nth-child(1),
+      .footer__col:nth-child(2),
+      .footer__col:nth-child(3) {
+        text-align: center;
+        align-items: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="https://maxzaika.com" class="nav__logo">
+      <span class="nav__logo-title">MAX ZA<span class="i-wrap">I<span class="dot"></span></span>KA</span>
+      <span class="nav__logo-role">Director of Photography</span>
+    </a>
+    <a href="https://maxzaika.com" class="nav__back">&#8592; Portfolio</a>
+  </header>
+
+  <section class="intro">
+    <p class="intro__eyebrow">Test Task &nbsp;/&nbsp; YouTube Shorts</p>
+    <h1 class="intro__title">Flowgrammer</h1>
+    <p class="intro__sub">
+      The client is <em>Max</em>. The producer is <em>Max</em>. I'm <em>Max</em>.<br>
+      Three Maxes, one deadline, zero confusion.
+    </p>
+  </section>
+
+  <div class="video-section">
+    <div class="video-wrap">
+      <video
+        src="https://pub-3aa35deeacea40599c3564eb9706b4a9.r2.dev/2606_text_MaxZaika.mp4"
+        controls
+        playsinline
+        preload="metadata"
+      ></video>
+      <p class="video-label">Final cut</p>
+    </div>
+  </div>
+
+  <hr class="rule" />
+
+  <div class="scope">
+    <div class="scope__sections">
+
+      <div class="scope__section">
+        <p class="section__label">Editing &amp; Compositing</p>
+        <p>Edited in DaVinci Resolve. For key moments in the script I generated background visuals using Google Flow to make the story more visually engaging — floating numbers, baby items drifting through space, wifi waves. Prompts were written with the help of Claude. All elements were keyed and composited directly in Resolve's Fusion page.</p>
+        <div class="tools">
+          <span class="tool">DaVinci Resolve</span>
+          <span class="tool">Fusion</span>
+          <span class="tool">Google Flow</span>
+          <span class="tool">Claude</span>
+        </div>
+      </div>
+
+      <div class="scope__section">
+        <p class="section__label">Sound</p>
+        <p>Background music pulled from my own personal library — faster to grab something I already have access to than searching a stock platform, though I use Artlist regularly when the project calls for it. SFX are a mix of my own collection and freesound.org.</p>
+        <div class="tools">
+          <span class="tool">Personal library</span>
+          <span class="tool">freesound.org</span>
+        </div>
+      </div>
+
+      <div class="scope__section">
+        <p class="section__label">Captions</p>
+        <p>Generated using DaVinci Resolve's built-in AI transcription. It's the fastest caption workflow I've found that stays entirely inside one program — no quality loss, no round-tripping through CapCut or Premiere. The style here is the default; caption design in Resolve is fully customizable, and I'd build a proper branded preset on day one if we work together. Set it up once, have it forever.</p>
+        <div class="tools">
+          <span class="tool">DaVinci Resolve AI</span>
+        </div>
+      </div>
+
+      <div class="scope__section">
+        <p class="section__label">Color</p>
+        <p>Light correction pass — boosted saturation slightly, balanced the clips against each other, kept the organic handheld feel intact.</p>
+        <div class="tools">
+          <span class="tool">DaVinci Resolve Color</span>
+        </div>
+      </div>
+
+      <div class="scope__section">
+        <p class="section__label">What I'd do differently</p>
+        <p>Custom caption styling would be the first thing. A couple more VFX moments if I had more tokens.</p>
+        <p>As a cinematographer, I'd also approach the shoot itself differently. If given the chance to brief the camera operator beforehand, I'd set up the shots with post in mind — framing, lighting, and movement choices that make compositing and color work significantly cleaner and faster. That conversation at the start saves a lot of time at the end.</p>
+        <p>Otherwise I'm happy with where it landed — curious to hear what the team thinks.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="bts">
+    <p class="bts__label">Behind the Scenes</p>
+    <h2 class="bts__heading">Edit Timeline</h2>
+    <img
+      class="bts__img"
+      src="https://pub-3aa35deeacea40599c3564eb9706b4a9.r2.dev/flowgrammer_timeline.jpg"
+      alt="DaVinci Resolve edit timeline for Flowgrammer"
+    />
+    <p class="bts__caption">DaVinci Resolve Studio 21 — Edit page</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__col">
+      <a href="https://maxzaika.com/impressum.html" target="_blank" class="footer__link">Impressum</a>
+      <a href="https://maxzaika.com/datenschutz.html" target="_blank" class="footer__link">Datenschutz</a>
+    </div>
+    <div class="footer__col">
+      <a href="https://instagram.com/zaikamax" target="_blank" class="footer__link">Instagram</a>
+      <a href="https://vimeo.com/zaikamax" target="_blank" class="footer__link">Vimeo</a>
+      <a href="mailto:max@maxzaika.com" class="footer__link">max@maxzaika.com</a>
+    </div>
+    <div class="footer__col">
+      <span>MAX ZAIKA</span>
+      <span>Hans-Otto-Str. 6, 10407 Berlin</span>
+      <span>+49 176 63817074</span>
+    </div>
+  </footer>
+
+</body>
+</html>
