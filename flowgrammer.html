@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flowgrammer — Max Zaika</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #242424;
+      --text: #e8e8e8;
+      --muted: #666;
+      --accent: #e8e8e8;
+      --label: #555;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(14,14,14,0.95) 0%, transparent 100%);
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    nav a:hover { opacity: 1; }
+
+    nav .logo {
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 1;
+      letter-spacing: 0.08em;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 140px 40px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .three-maxes {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      border-left: 1px solid var(--border);
+      padding-left: 16px;
+      margin-top: 4px;
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    /* MEDIA ROW */
+    .media-row {
+      max-width: 1100px;
+      margin: 60px auto 0;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .video-wrap {
+      width: 260px;
+      flex-shrink: 0;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+      background: #000;
+    }
+
+    .timeline-wrap {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .timeline-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 4px;
+      opacity: 0.85;
+      transition: opacity 0.3s;
+    }
+
+    .timeline-wrap img:hover { opacity: 1; }
+
+    .media-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-top: 10px;
+      font-family: var(--font-display);
+    }
+
+    /* DIVIDER */
+    .divider {
+      max-width: 1100px;
+      margin: 72px auto 0;
+      padding: 0 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* SCOPE SECTION */
+    .scope {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 40px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 64px;
+    }
+
+    .scope-nav {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+    }
+
+    .scope-nav ul {
+      list-style: none;
+    }
+
+    .scope-nav li {
+      margin-bottom: 4px;
+    }
+
+    .scope-nav a {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: block;
+      padding: 6px 0;
+    }
+
+    .scope-nav a:hover { color: var(--text); }
+
+    .scope-content section {
+      margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .scope-content section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .scope-content p {
+      color: #b0b0b0;
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 600px;
+    }
+
+    .scope-content p + p {
+      margin-top: 14px;
+    }
+
+    /* TOOLS USED */
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tool-tag {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 4px 10px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    footer span {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-display);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    footer a {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-display);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--text); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+
+      .hero { padding: 100px 20px 40px; }
+
+      .media-row {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+        gap: 16px;
+      }
+
+      .video-wrap {
+        width: 100%;
+      }
+
+      .timeline-wrap img {
+        max-height: 220px;
+        object-fit: cover;
+      }
+
+      .scope {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+        gap: 0;
+      }
+
+      .scope-nav {
+        position: static;
+        margin-bottom: 40px;
+      }
+
+      .scope-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 16px;
+      }
+
+      .divider { padding: 0 20px; }
+
+      footer {
+        padding: 30px 20px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://maxzaika.com" class="logo">Max Zaika</a>
+    <a href="https://maxzaika.com/cv">CV</a>
+  </nav>
+
+  <div class="hero">
+    <p class="eyebrow">Test Task &nbsp;/&nbsp; YouTube Shorts</p>
+    <h1>Flowgrammer</h1>
+    <p class="three-maxes">
+      The client is Max. The producer is Max. I'm Max.<br>
+      Three Maxes, one deadline, zero confusion.
+    </p>
+  </div>
+
+  <div class="media-row">
+    <div class="video-wrap">
+      <video
+        src="https://pub-3aa35deeacea40599c3564eb9706b4a9.r2.dev/2606_text_MaxZaika.mp4"
+        controls
+        playsinline
+        preload="metadata"
+      ></video>
+      <p class="media-label">Final cut</p>
+    </div>
+    <div class="timeline-wrap">
+      <img
+        src="https://pub-3aa35deeacea40599c3564eb9706b4a9.r2.dev/flowgrammer_timeline.jpg"
+        alt="DaVinci Resolve timeline for Flowgrammer edit"
+      />
+      <p class="media-label">DaVinci Resolve — Edit timeline</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="scope">
+    <nav class="scope-nav">
+      <ul>
+        <li><a href="#compositing">Compositing</a></li>
+        <li><a href="#sound">Sound</a></li>
+        <li><a href="#captions">Captions</a></li>
+        <li><a href="#color">Color</a></li>
+        <li><a href="#next">Next time</a></li>
+      </ul>
+    </nav>
+
+    <div class="scope-content">
+
+      <section id="compositing">
+        <p class="section-label">Editing &amp; Compositing</p>
+        <p>Edited in DaVinci Resolve. For key moments in the script I generated background visuals using Google Flow to make the story more visually engaging — floating numbers, baby items drifting through space, wifi waves. Prompts were written with the help of Claude. All elements were keyed and composited directly in Resolve's Fusion page.</p>
+        <div class="tools">
+          <span class="tool-tag">DaVinci Resolve</span>
+          <span class="tool-tag">Fusion</span>
+          <span class="tool-tag">Google Flow</span>
+          <span class="tool-tag">Claude</span>
+        </div>
+      </section>
+
+      <section id="sound">
+        <p class="section-label">Sound</p>
+        <p>Background music pulled from my own personal library — faster to grab something I already have access to than searching a stock platform, though I use Artlist regularly when the project calls for it. SFX are a mix of my own collection and freesound.org.</p>
+        <div class="tools">
+          <span class="tool-tag">Personal library</span>
+          <span class="tool-tag">freesound.org</span>
+        </div>
+      </section>
+
+      <section id="captions">
+        <p class="section-label">Captions</p>
+        <p>Generated using DaVinci Resolve's built-in AI transcription. It's the fastest caption workflow I've found that stays entirely inside one program — no quality loss, no round-tripping through CapCut or Premiere. The style here is the default; caption design in Resolve is fully customizable, and I'd build a proper branded preset on day one if we work together. Set it up once, have it forever.</p>
+        <div class="tools">
+          <span class="tool-tag">DaVinci Resolve AI</span>
+        </div>
+      </section>
+
+      <section id="color">
+        <p class="section-label">Color</p>
+        <p>Light correction pass — boosted saturation slightly, balanced the clips against each other, kept the organic handheld feel intact.</p>
+        <div class="tools">
+          <span class="tool-tag">DaVinci Resolve Color</span>
+        </div>
+      </section>
+
+      <section id="next">
+        <p class="section-label">What I'd do differently</p>
+        <p>Custom caption styling would be the first thing. A couple more VFX moments if I had more tokens.</p>
+        <p>As a cinematographer, I'd also approach the shoot itself differently. If given the chance to brief the camera operator beforehand, I'd set up the shots with post in mind — framing, lighting, and movement choices that make compositing and color work significantly cleaner and faster. That conversation at the start saves a lot of time at the end.</p>
+        <p>Otherwise I'm happy with where it landed — curious to hear what the team thinks.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>Max Zaika &mdash; Berlin, 2026</span>
+    <a href="https://maxzaika.com">Back to portfolio</a>
+  </footer>
+
+</body>
+</html>
